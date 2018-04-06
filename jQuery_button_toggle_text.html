@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery Button Toggle Text</title>
+<style>
+    .modern_button{width:200px;color:#F2F5FC;text-align:center;text-decoration:none;background-color:#00308F;transition:background-color 0.5s ease, border 0.5s ease;border:0px solid #BDCEEF;padding:5px 8px;margin-top:25px;}
+    .modern_button:hover{background-color:#0049D1;border:0px solid #D7E3F8;color:#ffffff;cursor:pointer;}
+</style>
+</head>
+
+<body>
+
+<cfset flag_inPage_edit_cf = "edit_OFF">
+<div class="modern_button" data-itnss="btn_inPage_edit" style="width:153px;margin:5px 0;"><span data-itnss="span_flag_text">#flag_inPage_edit_cf#</span></div>
+<input  data-itnss="h-input_flag_text" class="toggleEdit" value="#flag_inPage_edit_cf#"><!------>
+<script>
+
+    $(function(){
+        <cfoutput>var #toScript(flag_inPage_edit_cf, "flag_inPage_edit_js")#;</cfoutput>
+        console.log('page_Load - The ColdFusion variable (converted to JavaScript) is set to: '+flag_inPage_edit_js + '\n___________');
+        
+        $('[data-itnss="btn_inPage_edit"]').on('click', function(){
+            console.log('on-click - : '+flag_inPage_edit_js + '\n___________');
+            if( $('[data-itnss="h-input_flag_text"]').attr('value') == 'edit_OFF' ){
+                console.log('IF edit_OFF - : '+flag_inPage_edit_js + '\n___________');
+                flag_inPage_edit_js = 'edit_ON';
+                $('[data-itnss="h-input_flag_text"]').attr('value','edit_ON');
+                $('[data-itnss="span_flag_text"]').text('edit_ON');
+            }else{
+                console.log('IF edit_ON - : '+flag_inPage_edit_js + '\n___________');
+                flag_inPage_edit_js = 'edit_OFF';
+                $('[data-itnss="h-input_flag_text"]').attr('value','edit_OFF');
+                $('[data-itnss="span_flag_text"]').text('edit_OFF');
+            }
+        });//END on click event
+        
+        if (flag_inPage_edit_js == 'edit_OFF'){
+        console.log('edit_OFF - The ColdFusion variable (converted to JavaScript) is set to: '+flag_inPage_edit_js + '\n___________');
+        }
+        else{
+        console.log('edit_ON - The ColdFusion variable (converted to JavaScript) is set to: '+flag_inPage_edit_js + '\n___________');
+        }
+
+           
+    });//END DOM ready
+</script>
+
+
+<!--- --->
+</body>
+</html>
